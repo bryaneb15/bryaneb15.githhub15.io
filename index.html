@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <header class="header" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+    <img src="santa_rosa_transparent_f801e13008b149e398228f3cde4f9230.png" alt="Logo Colegio Santa Rosa" style="width: 120px; height: auto; margin-bottom: 1rem;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institución Educativa Integrada Santa Rosa - Formando el Futuro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #f59e0b;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --background-light: #f8fafc;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--background-light);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Tab Navigation */
+        .tab-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-top: -30px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .tab-nav {
+            display: flex;
+            background: var(--white);
+            border-bottom: 2px solid var(--background-light);
+            overflow-x: auto;
+            padding: 0 1rem;
+        }
+
+        .tab-nav::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .tab-nav::-webkit-scrollbar-track {
+            background: var(--background-light);
+        }
+
+        .tab-nav::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.05);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.1);
+        }
+
+        .tab-button i {
+            font-size: 1.2rem;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 3rem 2rem;
+            min-height: 70vh;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Content Styles */
+        .content-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        /* Achievements */
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .achievement-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-item i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Contact */
+        .contact-info {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25d366;
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tab-nav {
+                padding: 0 0.5rem;
+            }
+
+            .tab-button {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .tab-content {
+                padding: 2rem 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .social {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .whatsapp {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+  <header class="header">
+    <h1>Institución Educativa Integrada Santa Rosa</h1>
+    <p>Formando líderes con valores y excelencia académica desde 2012</p>
+    <p style="font-weight: bold; font-size: 1.2em; color: #2c3e50; margin-top: 10px;">
+        <i class="fas fa-graduation-cap" style="color: #3498db;"></i> Inicial - Primaria - Secundaria
+    </p>
+</header>
+
+
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab('historia')">
+                <i class="fas fa-book"></i>
+                Historia
+            </button>
+           <button class="tab-button" onclick="showTab('talleres')">
+    <i class="fas fa-tools"></i>
+    Talleres
+</button>
+
+            <button class="tab-button" onclick="showTab('profesores')">
+                <i class="fas fa-users"></i>
+                Profesores
+            </button>
+            <button class="tab-button" onclick="showTab('logros')">
+                <i class="fas fa-trophy"></i>
+                Logros
+            </button>
+            <button class="tab-button" onclick="showTab('galeria')">
+                <i class="fas fa-images"></i>
+                Galería
+            </button>
+            <button class="tab-button" onclick="showTab('testimonios')">
+                <i class="fas fa-quote-left"></i>
+                Testimonios
+            </button>
+            <button class="tab-button" onclick="showTab('contacto')">
+                <i class="fas fa-phone"></i>
+                Contacto
+            </button>
+        </div>
+
+        <!-- Historia Tab -->
+        <div id="historia" class="tab-content active">
+            <div class="content-section">
+                <h2>Nuestra Historia</h2>
+                <div class="grid">
+                    <div class="card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Fundación - 2012</h3>
+                        <p>El Colegio Santa Rosa fue creado oficialmente el 2 de marzo de 2012, ubicado en la Av. 06 de Agosto s/n (La Libertad, distrito de San Ramón, provincia de Chanchamayo, región Junín). Es una institución educativa pública de gestión directa, perteneciente a la UGEL Chanchamayo – DRE Junín, con código modular 1547454 y código de local 234382.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-users"></i>
+                        <h3>Más de 13 Años</h3>
+                        <p>Durante más de una década, hemos formado a cientos de estudiantes que han destacado en diversas áreas profesionales. Nuestros egresados han dejado huella en las mejores universidades e institutos del país, demostrando la calidad de nuestra educación.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-star"></i>
+                        <h3>Excelencia Educativa</h3>
+                        <p>Reconocidos por nuestra metodología innovadora y el compromiso constante con la calidad educativa. Nos enfocamos en el desarrollo integral de nuestros estudiantes, combinando formación académica con valores sólidos para la vida.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carreras Tab -->
+     <div id="talleres" class="tab-content">
+    <div class="content-section">
+        <h2>Talleres Técnicos</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas"></i>
+                <h3>Industria del vestido</h3>
+                <p>Desarrolla habilidades en confección, diseño textil y producción de prendas. Prepara a los estudiantes para insertarse en la industria de la moda y el emprendimiento textil.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-bowl-fod"></i>
+                <h3>Industria alimentaria</h3>
+                <p>Aprende técnicas culinarias, cocina peruana e internacional, así como gestión de restaurantes. Este taller fomenta la creatividad gastronómica y el emprendimiento en el sector alimentario.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-"></i>
+                <h3>Cosmetología y cuidado personal</h3>
+                <p>Desarrolla habilidades en estética, maquillaje, cuidado de la piel y cabello. El taller forma profesionales en belleza con proyección empresarial.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <!-- Profesores Tab -->
+        <div id="profesores" class="tab-content">
+            <div class="content-section">
+                <h2>Equipo Directivo y Docente</h2>
+                <div class="grid">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/1e40af/ffffff?text=Director" alt="Director">
+                        <h3>Gregorio Ayuque</h3>
+                        <p>Director General - Líder educativo con más de 20 años de experiencia en gestión académica y desarrollo institucional. Ha dirigido la transformación educativa de la institución.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/3b82f6/ffffff?text=Informática" alt="Profesor">
+                        <h3>Juan Pérez</h3>
+                        <p>Profesor de Informática - Especialista en tecnologías de la información con certificaciones internacionales. Experto en programación y desarrollo de aplicaciones.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/f59e0b/ffffff?text=Contabilidad" alt="Profesora">
+                        <h3>María Gonzales</h3>
+                        <p>Profesora de Contabilidad - Contadora Pública con amplia experiencia en docencia y consultoría empresarial. Especialista en finanzas y tributación.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/10b981/ffffff?text=Matemáticas" alt="Profesor">
+                        <h3>Carlos Soto</h3>
+                        <p>Profesor de Matemáticas - Especialista en enseñanza de matemáticas con más de 15 años de experiencia. Impulsor de métodos innovadores de aprendizaje.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/8b5cf6/ffffff?text=Lenguaje" alt="Profesora">
+                        <h3>Laura Chávez</h3>
+                        <p>Profesora de Lenguaje - Licenciada en Literatura con experiencia en técnicas de comprensión lectora y redacción creativa. Fomenta el amor por la lectura.</p>
+                    </div>
+                    <div class="card">
+                        <img src="https://via.placeholder.com/200x200/ef4444/ffffff?text=Historia" alt="Profesor">
+                        <h3>Andrés Torres</h3>
+                        <p>Profesor de Historia - Apasionado por la historia del Perú y del mundo, con enfoque en enseñanza interactiva y desarrollo del pensamiento crítico.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logros Tab -->
+        <div id="logros" class="tab-content">
+            <div class="content-section">
+                <h2>Logros y Reconocimientos</h2>
+                <div class="achievements">
+                    <div class="achievement-item">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Mejor Colegio 2023</h3>
+                        <p>Reconocido como el mejor colegio técnico de la región Junín por su excelencia académica y formación integral de estudiantes.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-medal"></i>
+                        <h3>Campeones Matemáticas</h3>
+                        <p>Primer lugar en las olimpiadas matemáticas regionales 2022, demostrando el alto nivel académico de nuestros estudiantes.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>95% Ingreso Superior</h3>
+                        <p>El 95% de nuestros egresados logran ingresar a universidades e institutos superiores, destacando en exámenes de admisión.</p>
+                    </div>
+                    <div class="achievement-item">
+                        <i class="fas fa-star"></i>
+                        <h3>Acreditación Educativa</h3>
+                        <p>Institución acreditada por el Ministerio de Educación por cumplir con los más altos estándares de calidad educativa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galería Tab -->
+        <div id="galeria" class="tab-content">
+            <div class="content-section">
+                <h2>Galería de Fotos</h2>
+                <div class="gallery">
+                    <img src="PREMIACION.jpg" alt="Aula moderna">
+                    <img src="AAA.jpg" alt="Laboratorio de informática">
+                    <img src="COLE.jpg" alt="Biblioteca">
+                    <img src="ALCALDESA.jpg" alt="Actividades deportivas">
+                    <img src="https://via.placeholder.com/300x200/8b5cf6/ffffff?text=Graduación" alt="Ceremonia de graduación">
+                    <img src="https://via.placeholder.com/300x200/ef4444/ffffff?text=Estudiantes" alt="Estudiantes en clase">
+                    <img src="https://via.placeholder.com/300x200/06b6d4/ffffff?text=Patio" alt="Patio principal">
+                    <img src="https://via.placeholder.com/300x200/f97316/ffffff?text=Eventos" alt="Eventos escolares">
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonios Tab -->
+        <div id="testimonios" class="tab-content">
+            <div class="content-section">
+                <h2>Testimonios de Egresados</h2>
+                <div class="testimonials">
+                    <div class="testimonial">
+                        <p>Gracias al Colegio Santa Rosa, hoy estudio en la Universidad Nacional Mayor de San Marcos. La formación que recibí me dio las herramientas necesarias para destacar en mis estudios superiores y enfrentar los desafíos universitarios.</p>
+                        <div class="testimonial-author">- Ana López, Egresada 2020</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>La formación que recibí aquí me preparó para ser un gran profesional. Los valores y conocimientos adquiridos son la base de mi éxito actual en el mundo empresarial. Agradezco profundamente a todos mis maestros.</p>
+                        <div class="testimonial-author">- Carlos Ruiz, Egresado 2018</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>El Colegio Santa Rosa no solo me brindó educación de calidad, sino que también me enseñó la importancia del trabajo en equipo y la perseverancia. Estos valores me han acompañado en toda mi carrera profesional.</p>
+                        <div class="testimonial-author">- María Fernández, Egresada 2019</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>Estudiar en Santa Rosa cambió mi vida. Los profesores no solo enseñan conocimientos, sino que forman personas íntegras. Hoy soy un profesional exitoso gracias a la base sólida que recibí aquí.</p>
+                        <div class="testimonial-author">- Pedro Ramírez, Egresado 2017</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contacto Tab -->
+        <div id="contacto" class="tab-content">
+            <div class="content-section">
+                <h2>Contáctanos</h2>
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <p style="margin: 1rem 0; font-size: 1.1rem;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        Dirección: Av. 06 de Agosto s/n, La Libertad, San Ramón - Chanchamayo, Junín
+                    </p>
+                    <p style="margin: 1rem 0; font-size: 1.1rem;">
+                        <i class="fas fa-phone" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        Teléfono: +51 961 058 844
+                    </p>
+                    <p style="margin: 1rem 0; font-size: 1.1rem;">
+                        <i class="fas fa-envelope" style="color: var(--primary-color); margin-right: 0.5rem;"></i>
+                        Email: iei.santarosa88@gmail.com
+                    </p>
+                    
+                    <h3 style="margin-top: 2rem;">Síguenos en nuestras redes sociales</h3>
+                    <div class="social">
+                        <a href="https://www.facebook.com/IEI.SantaRosa88?locale=es_LA"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+                        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+
+                    </div>
+                    
+                    <div style="margin-top: 2rem; padding: 1rem; background: var(--background-light); border-radius: 10px;">
+                        <h4>Horarios de Atención</h4>
+                        <p>Lunes a Viernes: 8:00 AM - 3:00 PM</p>
+                        <p>Sábados:  Cerrado</p>
+                        <p>Domingos: Cerrado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/51961058844" class="whatsapp" target="_blank" title="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Gallery image click effect
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', () => {
+                if (img.style.transform === 'scale(1.2)') {
+                    img.style.transform = 'scale(1)';
+                    img.style.zIndex = '1';
+                    img.style.position = 'static';
+                } else {
+                    img.style.transform = 'scale(1.2)';
+                    img.style.zIndex = '1000';
+                    img.style.position = 'relative';
+                }
+            });
+        });
+
+        // Add smooth scrolling animation for tab switching
+        document.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabContainer = document.querySelector('.tab-container');
+                tabContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
